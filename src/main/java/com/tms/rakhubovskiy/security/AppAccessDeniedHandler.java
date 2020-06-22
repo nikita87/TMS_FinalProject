@@ -15,6 +15,6 @@ public class AppAccessDeniedHandler implements AccessDeniedHandler {
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException e) throws IOException, ServletException {
         request.setAttribute("error", e.getLocalizedMessage());
         request.setAttribute("message", "Oops! You have not enough rights!");
-        request.getRequestDispatcher("error.jsp").forward(request, response);
+        request.getRequestDispatcher("error.html").forward(request, response);
     }
 }

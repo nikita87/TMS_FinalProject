@@ -2,6 +2,7 @@ package com.tms.rakhubovskiy.security;
 
 import com.tms.rakhubovskiy.model.User;
 import com.tms.rakhubovskiy.repository.UserRepository;
+import com.tms.rakhubovskiy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -19,14 +20,14 @@ import java.util.stream.Collectors;
 public class AppAuthenticationProvider implements AuthenticationProvider {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @Autowired
     PasswordEncoder passwordEncoder;
 
     @Override
     public Authentication authenticate(Authentication auth) throws AuthenticationException {
-        User user = userRepository.findByUsername(auth.getName());
+        User user = userService.findUserByUsername(auth.getName());
         if (user == null){
             throw new UsernameNotFoundException(String.format("User not found: %s", auth.getName()));
         }

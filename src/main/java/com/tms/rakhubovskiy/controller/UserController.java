@@ -1,28 +1,26 @@
 package com.tms.rakhubovskiy.controller;
 
 import com.tms.rakhubovskiy.model.User;
-import com.tms.rakhubovskiy.repository.UserRepository;
+import com.tms.rakhubovskiy.service.UserService;
 import com.tms.rakhubovskiy.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
-@RestController
+@Controller
 public class UserController {
 
-    private final UserRepository userRepository;
+    private final UserService userService;
 
     @Autowired
     private UserValidator userValidator;
 
     @Autowired
-    public UserController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping("/login")
@@ -44,11 +42,9 @@ public class UserController {
             model.addAttribute("errors", bindingResult.getAllErrors());
             return "../../error";
         }
-        userRepository.save(newUser);
+        userService.addUser(newUser);
         return "user_page";
     }
-
-
 
    /* @GetMapping("/user_page")
     public String findAll(Model model){

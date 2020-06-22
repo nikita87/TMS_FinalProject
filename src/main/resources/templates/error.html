@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Travel Planner</title>
+</head>
+<body>
+
+<h1>${message}</h1>
+
+<h3>${error}</h3>
+<h3>${errors}</h3>
+<th:forEach var="error" items="errors">
+    <th:out value="${error}">${error}</th:out>
+</th:forEach>
+</body>
+</html>

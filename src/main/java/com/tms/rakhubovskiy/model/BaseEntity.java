@@ -6,7 +6,6 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Data
-@Entity
 @MappedSuperclass
 @Table(indexes = {
         @Index(columnList = "created"),
