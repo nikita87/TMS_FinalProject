@@ -23,16 +23,21 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping("/")
+    public String index() {
+        return "/index";
+    }
+
     @GetMapping("/login")
     public String login(){
-        return "login";
+        return "/login";
     }
 
     @GetMapping("/registration")
     public String registr(Model model){
         User newUser = new User();
         model.addAttribute("newUser", newUser);
-        return "registration";
+        return "/registration";
     }
 
     @PostMapping("/registration")
@@ -40,10 +45,10 @@ public class UserController {
         userValidator.validate(newUser, bindingResult);
         if (bindingResult.hasErrors()){
             model.addAttribute("errors", bindingResult.getAllErrors());
-            return "../../error";
+            return "/error";
         }
         userService.addUser(newUser);
-        return "user_page";
+        return "/user_page";
     }
 
    /* @GetMapping("/user_page")

@@ -37,14 +37,14 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("login").permitAll()
                 .antMatchers("/registration").permitAll()
                 .anyRequest().authenticated()
                 //.antMatchers("user_page").authenticated()
              .and()
                 .formLogin()
                 .loginPage("/login")
-                .loginProcessingUrl("perform_login")
+                .permitAll()
+                .loginProcessingUrl("/perform_login")
                 .defaultSuccessUrl("/user_page")
              .and()
                 .logout()
