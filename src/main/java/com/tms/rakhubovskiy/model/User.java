@@ -12,16 +12,12 @@ import java.util.List;
 @Table(name = "users")
 @NoArgsConstructor
 @AllArgsConstructor
-public class User extends BaseEntity{
+public class User extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "username")
+    @Column(name = "username", unique = true)
     private String username; // логин для входа в приложение и аутентификации - email
 
-    @Column(name = "password")
+    @Column(name = "passw")
     private String password; // пароль для входа и проверки пользователя
 
     @Column(name = "firstname")
@@ -32,7 +28,18 @@ public class User extends BaseEntity{
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles",
-               joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
-               inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
     private List<Role> roles;
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", roles=" + roles +
+                '}';
+    }
 }

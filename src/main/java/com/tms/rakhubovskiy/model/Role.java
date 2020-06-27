@@ -10,20 +10,24 @@ import java.util.List;
 @Data
 @Builder
 @Entity
-@Table(name = "role")
+@Table(name = "roles")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Role {
+public class Role extends BaseEntity{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; //id роли авторизованного пользователя
-
-    @Column(name = "name")
-    private String name; //наименование роли
+    @Column(name = "rolename")
+    @Enumerated(value = EnumType.STRING)
+    private EnumRoles name; //перечень ролей
 
     @Transient
     @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
     private List<User> users;
 
+    @Override
+    public String toString() {
+        return "Role{" +
+                "name=" + name +
+                ", users=" + users +
+                '}';
+    }
 }
