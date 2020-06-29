@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Travel Planner</title>
+    <title>Travel Planning Service</title>
 </head>
 <body>
 
@@ -11,7 +11,7 @@
 <h3>${error}</h3>
 <h3>${errors}</h3>
 <th:forEach var="error" items="errors">
-    <th:out value="${error}">${error}</th:out>
+    <th:out value="@{/error}">${error}</th:out>
 </th:forEach>
 </body>
 </html>

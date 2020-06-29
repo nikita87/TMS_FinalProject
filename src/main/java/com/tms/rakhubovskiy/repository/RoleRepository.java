@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Long> {
-    @Query("from Role r where r.id=1L")
+    @Query("from Role r where r.id=2L")
     List<Role> findRoleById();
 }

@@ -16,7 +16,7 @@
 <body>
 <div style="text-align: center">
     <div style="text-align: center">
-        <form method="post" action="/perform_login">
+        <form method="post" th:action="@{/perform_login}">
             <input name="${_csrf.parameterName}" value="${_csrf.token}" type="hidden">
             <span class="login100-form-title">
                 Login
@@ -27,13 +27,13 @@
             </div>-->
 
             <p></p>
-            <div data-validate="Enter username">
+            <div data-validate="Username is required">
                 <input type="text" name="username" placeholder="Username">
                 <span></span>
             </div>
 
             <p></p>
-            <div data-validate="Enter password">
+            <div data-validate="Password is required">
                 <input type="password" name="password" placeholder="Password">
                 <span></span>
             </div>

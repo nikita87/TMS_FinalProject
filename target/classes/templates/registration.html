@@ -12,31 +12,32 @@
             background-size: 100%;
         }
     </style>
-</head>
+    </head>
 <body>
 <div style="text-align: center"  >
     <div style="text-align: center" >
+
         <form action="#" th:action="@{/registration}" th:object="${newUser}" method="post" >
 
-            <div data-validate="Enter username">
-                <input id="username" type="text" name="username" placeholder="Username or Email">
+            <div data-validate="username is required">
+                <input id="username" type="text" name="username" placeholder="Username">
                 <span></span>
             </div>
             <p></p>
 
-            <div data-validate="Enter password">
+            <div data-validate="password is required">
                 <input id="password" type="password" name="password" placeholder="Password">
                 <span></span>
             </div>
             <p></p>
 
-            <div data-validate = "Enter firstname">
+            <div data-validate = "firstname is required">
                 <input id="firstname"  type="text" name="firstname" placeholder="Firstname">
                 <span ></span>
             </div>
             <p></p>
 
-            <div data-validate = "Enter lastname">
+            <div data-validate = "lastname is required">
                 <input id="lastname"  type="text" name="lastname" placeholder="Lastname">
                 <span ></span>
             </div>
