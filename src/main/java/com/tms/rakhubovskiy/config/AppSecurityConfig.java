@@ -38,8 +38,8 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
 
                 .antMatchers("/h2/**").permitAll()
-                .antMatchers("/").permitAll()
                 .antMatchers("/registration").permitAll()
+                .antMatchers("/").permitAll()
                 .anyRequest().authenticated()
              .and()
                 .formLogin()

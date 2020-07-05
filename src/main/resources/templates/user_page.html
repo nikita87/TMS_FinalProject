@@ -2,9 +2,64 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/user_page.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
     <title>Travel Planning Service</title>
+    <style>
+        body {
+            background-color: #fd7e14;
+            color: darkslateblue;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-size: 100%;
+        }
+    </style>
 </head>
 <body>
-<h1 align="center">User Page</h1>
+<h1 align="center">Travel Planner</h1>
+<!--меню с вкладками -->
+<ul id="menu">
+    <li id="hotelsearch" class="tab_active" onclick="tab(this);">Поиск отелей</li>
+    <li id="timetable" onclick="tab(this);">Расписание</li>
+    <li id="money" onclick="tab(this);">Бюджет</li>
+</ul>
+
+<!--контейнер со страницами -->
+<div id="container">
+    <div id="hotelsearch_content" class="tab_content_visible">Поиск отелей</div>
+    <div id="timetable_content" class="tab_content">Расписание</div>
+    <div id="money_content" class="tab_content">Бюджет</div>
+</div>
+
+<script>
+    function tab(el) {
+        //Получить список вкладок
+        var menu=el.parentNode;
+        var tabs=menu.getElementsByTagName('li');
+        for(var i=0; i<tabs.length; i++){
+            //Вкладка
+            var tab=tabs[i];
+            //Блок контента
+            var content=document.getElementById(tab.id+'_content');
+            //Вкладка по которой кликнули мышкой
+            if(tab.id==el.id){
+                //сделать вкладку активной
+                tab.className='tab_active';
+                //показать связанный с ней блок контента
+                if(content){
+                    content.className='tab_content visible';
+                }
+            }
+            else {
+                //сделать вкладку неактивной
+                tab.className='';
+                //скрыть связанный с ней блок контента
+                if(content) {
+                    content.className='tab_content';
+                }
+            }
+        }
+    }
+</script>
 </body>
 </html>
