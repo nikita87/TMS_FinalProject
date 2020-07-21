@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/css/user_page.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/travelPlanner.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
        <title>Travel Planning Service</title>
     <style>
@@ -22,13 +21,12 @@
 <ul id="menu">
     <li id="hotelsearch" class="tab_active" onclick="tab(this);">Поиск отелей</li>
     <li id="timetable" onclick="tab(this);">Расписание</li>
-    <li id="money" onclick="tab(this);">Бюджет</li>
+    <li id="budget" onclick="tab(this);">Бюджет</li>
 </ul>
 
 <!--контейнер со страницами -->
 <div id="container">
-    <div id="hotelsearch_content" class="tab_content visible">
-        <form action="@{user_page}" method="post">
+        <div id="hotelsearch_content" class="tab_content visible">
             <div class="row">
                 <div class="col-75">
                     <input type="text" id="country" name="country" placeholder="Выберите страну...">
@@ -41,24 +39,56 @@
             </div>
             <div class="row">
                 <div class="col-75">
-                    <input type="text" id="hotelclass" name="hotelclass" placeholder="Выберите класс отеля...">
+                    <select class="custom-select">
+                        <option value="0">Выберите класс отеля:</option>
+                        <option value="1">1*</option>
+                        <option value="2">2*</option>
+                        <option value="3">2+*</option>
+                        <option value="4">3*</option>
+                        <option value="5">3+*</option>
+                        <option value="6">4*</option>
+                        <option value="7">4+*</option>
+                        <option value="8">5*</option>
+                        <option value="9">5+*</option>
+                    </select>
                 </div>
             </div>
             <div class="row">
                 <br>
-                <input type="submit" value="Найти">
+                <input id="inputSearch" type="submit" value="Найти">
             </div>
-        </form>
-    </div>
+        </div>
+
     <div id="timetable_content" class="tab_content">
-        <form id="addWishListItem" novalidate="novalidate">
-            <div class="fieldInput">
-                <input type="text" autocomplete="off" name="name" data-rule-eventnamerequired="true" placeholder="Например, Музей">
+        <form th:action="@{/travelPlanner}" th:object="${newEvent}" method="post">
+            <div class="row-timetable">
+                <input id="eventName" type="text" autocomplete="off" name="eventName" placeholder="Например, Централ Парк">
+                <input id="eventDate" type="date" name="eventDate">
+                <input id="eventTime" type="time" name="eventTime">
             </div>
-            <input type="submit" value class="submit">
+            <div class="row">
+                <button id="eventAdd" type="submit">Добавить</button>
+            </div>
+            <div>
+                <table border="1">
+                    <tr>
+                        <th>Name of event</th>
+                        <th>Date of event</th>
+                        <th>Time of event</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr th:each ="event:${events}">
+                        <td th:utext="${event.eventName}"></td>
+                        <td th:utext="${event.eventDate}"></td>
+                        <td th:utext="${event.eventTime}"></td>
+                        <td><a th:href="@{travelPlanner/{id}(id=${event.id})}">Delete</a></td>
+                    </tr>
+                </table>
+            </div>
         </form>
+
     </div>
-    <div id="money_content" class="tab_content">
+    <div id="budget_content" class="tab_content">
         Бюджет
     </div>
 </div>
@@ -84,6 +114,7 @@
             }
         }
     }
+
 </script>
 </body>
 </html>

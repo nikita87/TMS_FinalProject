@@ -1,8 +1,8 @@
-package com.rakhubovskiy.travelplanningservice.controller;
+package com.tms.rakhubovskiy.controller;
 
-import com.rakhubovskiy.travelplanningservice.model.User;
-import com.rakhubovskiy.travelplanningservice.service.UserService;
-import com.rakhubovskiy.travelplanningservice.validator.UserValidator;
+import com.tms.rakhubovskiy.model.User;
+import com.tms.rakhubovskiy.service.UserService;
+import com.tms.rakhubovskiy.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class LoginController {
+public class LoginController extends BaseController {
 
     private final UserService userService;
 
@@ -50,9 +50,10 @@ public class LoginController {
 
         User checkUser = userService.saveUser(newUser);
         if (checkUser != null){
-            return "/user_page";
+            return "/travelPlanner";
         }
         model.addAttribute("error", "This username already exist. Please enter another one.");
         return "/registration";
     }
+
 }

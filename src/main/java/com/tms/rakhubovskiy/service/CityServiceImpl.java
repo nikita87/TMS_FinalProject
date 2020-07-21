@@ -1,10 +1,11 @@
-package com.rakhubovskiy.travelplanningservice.service;
+package com.tms.rakhubovskiy.service;
 
-import com.rakhubovskiy.travelplanningservice.model.City;
-import com.rakhubovskiy.travelplanningservice.repository.CityRepository;
+import com.tms.rakhubovskiy.model.City;
+import com.tms.rakhubovskiy.repository.CityRepository;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
+
 
 @Service
 @Transactional

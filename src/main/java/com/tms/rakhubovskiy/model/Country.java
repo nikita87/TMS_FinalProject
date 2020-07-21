@@ -1,4 +1,4 @@
-package com.rakhubovskiy.travelplanningservice.model;
+package com.tms.rakhubovskiy.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

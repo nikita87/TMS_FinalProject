@@ -1,4 +1,4 @@
-package com.tms.rakhubovskiy.security;
+package com.tms.rakhubovskiy.config.security;
 
 import com.tms.rakhubovskiy.model.User;
 import com.tms.rakhubovskiy.service.UserService;

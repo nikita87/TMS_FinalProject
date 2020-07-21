@@ -1,10 +1,10 @@
 package com.tms.rakhubovskiy.repository;
 
-import com.tms.rakhubovskiy.model.Country;
+import com.tms.rakhubovskiy.model.Event;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CountryRepository extends JpaRepository<Country, String> {
+public interface EventRepository extends JpaRepository<Event, Long> {
 
 }

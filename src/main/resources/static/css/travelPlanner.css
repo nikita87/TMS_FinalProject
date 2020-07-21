@@ -1,0 +1,178 @@
+/* строка меню */
+#menu {
+    margin: 0px;
+    padding: 0px 5px 0px 5px;
+    list-style: none;
+    height: 32px;
+    border-bottom: 2px solid #fd7e14;
+    background: #b3d7ff;
+    font-family: Arial;
+    position: relative;
+    top: 10px;
+}
+
+/* вкладка меню */
+#menu li {
+    float: left;
+    display: inline;
+    margin: 0px 2px -1px 0px;
+    padding: 5px 25px 5px 25px;
+    height: 20px;
+    cursor: pointer;
+    color: #000000;
+    background: #fd7e14;
+    border: 2px solid #fd7e14;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+/* активная вкладка меню */
+.tab_active {
+    border-bottom: 2px solid #fd7e14;
+    color: #000000;
+    background: #fd7e14;
+    height: 30px !important;
+    position: relative;
+    top: -10px;
+}
+
+/* контейнер с блоками контента */
+#container {
+    clear: both;
+    border: 2px solid #fd7e14;
+    border-width: 0px 2px 2px 2px;
+    border-radius: inherit;
+    height: auto;
+    padding: 5px;
+}
+
+/* скрытый блок контента */
+#container .tab_content {
+    display: none;
+}
+
+/* видимый блок контента */
+.visible {
+    display: block !important;
+}
+
+/*поле ввода*/
+input[type=text]{
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid orange;
+    float: left;
+    width: 30%;
+    background: #f1f1f1;
+}
+
+input[type=date]{
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid orange;
+    float: left;
+    width: 10%;
+    background: #f1f1f1;
+}
+
+input[type=time]{
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid orange;
+    float: left;
+    width: 10%;
+    background: #f1f1f1;
+
+}
+.col-75 {
+    float: left;
+    width: 75%;
+    margin-top: 6px;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.row-timetable:after {
+    content: "";
+    display: inline;
+    clear: both;
+}
+
+/* Стиль кнопки submit */
+button[type=submit] {
+    background-color: #fd7e14;
+    color: #000000;
+    font-weight: bold;
+    font-family: Arial;
+    font-size: 17px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: inherit;
+}
+
+.custom-select {
+    position: relative;
+    font-family: Arial;
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid orange;
+    float: left;
+    width: 30%;
+    background: #f1f1f1;
+}
+
+.select-selected {
+    background-color: DodgerBlue;
+}
+
+
+.select-selected:after {
+    position: absolute;
+    content: "";
+    top: 14px;
+    right: 10px;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-color: #fff transparent transparent transparent;
+}
+
+
+.select-selected.select-arrow-active:after {
+    border-color: transparent transparent #fff transparent;
+    top: 7px;
+}
+
+
+.select-items div,.select-selected {
+    color: #ffffff;
+    padding: 8px 16px;
+    border: 1px solid transparent;
+    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+    cursor: pointer;
+}
+
+
+.select-items {
+    position: absolute;
+    background-color: DodgerBlue;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+}
+
+
+.select-hide {
+    display: none;
+}
+
+.select-items div:hover, .same-as-selected {
+    background-color: rgba(0, 0, 0, 0.1);
+}

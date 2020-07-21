@@ -1,11 +1,13 @@
-package com.rakhubovskiy.travelplanningservice.service;
+package com.tms.rakhubovskiy.service;
 
-import com.rakhubovskiy.travelplanningservice.model.Country;
-import com.rakhubovskiy.travelplanningservice.repository.CountryRepository;
+
+import com.tms.rakhubovskiy.model.Country;
+import com.tms.rakhubovskiy.repository.CountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
+
 
 @Service
 @Transactional

@@ -1,7 +1,6 @@
-package com.rakhubovskiy.travelplanningservice.service;
+package com.tms.rakhubovskiy.service;
 
-import com.rakhubovskiy.travelplanningservice.model.City;
-
+import com.tms.rakhubovskiy.model.City;
 import java.util.List;
 
 public interface CityService {

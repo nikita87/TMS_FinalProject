@@ -1,7 +1,6 @@
-package com.rakhubovskiy.travelplanningservice.service;
+package com.tms.rakhubovskiy.service;
 
-import com.rakhubovskiy.travelplanningservice.model.Country;
-
+import com.tms.rakhubovskiy.model.Country;
 import java.util.List;
 
 public interface CountryService {
