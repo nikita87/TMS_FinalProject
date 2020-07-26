@@ -4,30 +4,27 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.NaturalId;
 import javax.persistence.*;
-import java.util.List;
+
 
 @Data
 @Builder
 @Entity
-@Table(name = "country")
+@Table(name = "countries")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Country extends BaseEntity {
 
-    @NaturalId
-    @Column(name = "Code", unique = true)
+    @Column(name = "countrycode", unique = true)
     private String code;
 
-    @Column(name = "Name")
+    @Column(name = "countryname")
     private String name;
 
-    @Column(name = "Continent")
-    @Enumerated(value = EnumType.STRING)
-    private EnumContinets continent;
+    @Column(name = "continent")
+    private String continent;
 
-    @Column(name = "Region")
+    @Column(name = "region")
     private String region;
 
     @Override
@@ -35,7 +32,7 @@ public class Country extends BaseEntity {
         return "Country{" +
                 "code='" + code + '\'' +
                 ", name='" + name + '\'' +
-                ", continent=" + continent +
+                ", continent='" + continent + '\'' +
                 ", region='" + region + '\'' +
                 '}';
     }

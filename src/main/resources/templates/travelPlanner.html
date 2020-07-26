@@ -8,7 +8,7 @@
     <style>
         body {
             background-color: #b3d7ff;
-            color: darkslateblue;
+            color: black;
             background-attachment: fixed;
             background-repeat: no-repeat;
             background-size: 100%;
@@ -16,31 +16,54 @@
     </style>
 </head>
 <body>
+<div th:if="${#session.getAttribute('admin')==true}">
+    <div>
+        <a href="/adminTravelPlanner">Go to admin page</a>
+    </div>
+</div>
+<div>
+    <a href="/">
+        Logout
+    </a>
+</div>
+
 <h1 align="center">Travel Planner</h1>
 <!--меню с вкладками -->
 <ul id="menu">
-    <li id="hotelsearch" class="tab_active" onclick="tab(this);">Поиск отелей</li>
-    <li id="timetable" onclick="tab(this);">Расписание</li>
-    <li id="budget" onclick="tab(this);">Бюджет</li>
+    <li id="hotelsearch" class="tab_active" onclick="tab(this);">Hotel search</li>
+    <li id="timetable" onclick="tab(this);">Timetable</li>
+    <li id="budget" onclick="tab(this);">Budget</li>
 </ul>
 
 <!--контейнер со страницами -->
 <div id="container">
-        <div id="hotelsearch_content" class="tab_content visible">
+    <div id="hotelsearch_content" class="tab_content visible">
+        <form th:action="@{/travelPlanner/}" th:object="${country}" method="post">
             <div class="row">
                 <div class="col-75">
-                    <input type="text" id="country" name="country" placeholder="Выберите страну...">
+                    <select class="custom-select" >
+                        <option value="">Choose country:</option>
+                        <option th:each="country:${countries}"
+                                th:value="${country.code}"
+                                th:text="${country.name}"/>
+                    </select>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-75">
-                    <input type="text" id="city" name="city" placeholder="Выберите город...">
+                    <select class="custom-select">
+                        <option value="">Choose city:</option>
+                        <option th:each="city:${cities}"
+                                th:value="${city.countryCode}"
+                                th:text="${city.name}"/>
+                    </select>
                 </div>
             </div>
             <div class="row">
                 <div class="col-75">
                     <select class="custom-select">
-                        <option value="0">Выберите класс отеля:</option>
+                        <option value="0">Choose hotel class:</option>
                         <option value="1">1*</option>
                         <option value="2">2*</option>
                         <option value="3">2+*</option>
@@ -55,19 +78,20 @@
             </div>
             <div class="row">
                 <br>
-                <input id="inputSearch" type="submit" value="Найти">
+                <button id="inputSearch" type="submit">Search</button>
             </div>
-        </div>
+        </form>
+    </div>
 
     <div id="timetable_content" class="tab_content">
         <form th:action="@{/travelPlanner}" th:object="${newEvent}" method="post">
             <div class="row-timetable">
-                <input id="eventName" type="text" autocomplete="off" name="eventName" placeholder="Например, Централ Парк">
+                <input id="eventName" type="text" autocomplete="off" name="eventName" placeholder="For example, Central Park">
                 <input id="eventDate" type="date" name="eventDate">
                 <input id="eventTime" type="time" name="eventTime">
             </div>
             <div class="row">
-                <button id="eventAdd" type="submit">Добавить</button>
+                <button id="eventAdd" type="submit">Add</button>
             </div>
             <div>
                 <table border="1">
@@ -114,7 +138,6 @@
             }
         }
     }
-
 </script>
 </body>
 </html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/travelPlanner.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+       <title>Travel Planning Service</title>
+    <style>
+        body {
+            background-color: #b3d7ff;
+            color: black;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-size: 100%;
+        }
+    </style>
+</head>
+<body>
+<a href="/travelPlanner">Back to user page</a>
+
+<h1 align="center">Travel Planner</h1>
+<!--меню с вкладками -->
+<ul id="menu">
+    <li id="cityInfo" class="tab_active" onclick="tab(this);">cityInfo</li>
+    <li id="countryInfo" onclick="tab(this);">countryInfo</li>
+    <li id="hotelinfo" onclick="tab(this);">hotelInfo</li>
+    <li id="userinfo" onclick="tab(this);">userInfo</li>
+</ul>
+
+<!--контейнер со страницами -->
+<div id="container">
+    <div id="cityInfo_content" class="tab_content">
+        <form th:action="@{/adminTravelPlanner}" th:object="${newCity}" method="post">
+            <div class="row">
+                <div class="col-75">
+                    <input id="cityName" type="text" autocomplete="off" name="cityName" placeholder="Enter city name">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-75">
+                    <input id="countryCode" type="text" autocomplete="off" name="countryCode" placeholder="enter country code(for example, NLD)">
+                </div>
+            </div>
+            <div class="row">
+                <br>
+                <button id="cityAdd" type="submit">Add</button>
+            </div>
+            <div>
+                <br>
+                <table border="1">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name of city</th>
+                        <th>Code of country</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr th:each ="city:${city}">
+                        <td th:utext="${city.id}"></td>
+                        <td th:utext="${city.cityName}"></td>
+                        <td th:utext="${city.countryCode}"></td>
+                        <td><a th:href="@{adminTravelPlanner/{id}(id=${city.id})}">Delete</a></td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function tab(el) {
+        var menu=el.parentNode;                                        //Получить список вкладок
+        var tabs=menu.getElementsByTagName('li');
+        for(var i=0; i<tabs.length; i++){
+            var tab=tabs[i];                                           //Вкладка
+            var content=document.getElementById(tab.id + '_content');  //Блок контента
+            if(tab.id==el.id){                                         //Вкладка по которой кликнули мышкой
+                tab.className='tab_active';                            //сделать вкладку активной
+                if(content){                                           //показать связанный с ней блок контента
+                    content.className='tab_content visible';
+                }
+            }
+            else {
+                tab.className='';                                     //сделать вкладку неактивной
+                if(content) {
+                    content.className='tab_content';                  //скрыть связанный с ней блок контента
+                }
+            }
+        }
+    }
+</script>
+</body>
+</html>

@@ -17,9 +17,26 @@ public class CityServiceImpl implements CityService {
         this.cityRepository = cityRepository;
     }
 
-    @Override
-    public List<City> findCitiesByCountryCode(String countryCode) {
-        List<City> cities = cityRepository.findCitiesByCountryCode(countryCode);
+    /*@Override
+    public List<City> findAllByCountry_code(String countryCode) {
+        List<City> cities = cityRepository.findAllByCountry_code(countryCode);
         return cities;
+    }*/
+
+    @Override
+    public List<City> findAll() {
+        return cityRepository.findAll();
     }
+
+    @Override
+    public City saveCity(City city) {
+        return cityRepository.save(city);
+    }
+
+    @Override
+    public void deleteCityById(Long id) {
+        cityRepository.deleteById(id);
+    }
+
+
 }

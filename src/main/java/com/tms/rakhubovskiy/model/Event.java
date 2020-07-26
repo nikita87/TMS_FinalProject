@@ -1,13 +1,10 @@
 package com.tms.rakhubovskiy.model;
 
-import com.sun.prism.impl.FactoryResetException;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
-import java.util.Date;
 
 @Data
 @Builder
@@ -17,13 +14,13 @@ import java.util.Date;
 @AllArgsConstructor
 public class Event extends BaseEntity {
 
-    @Column(name = "Name")
+    @Column(name = "name")
     private String eventName;
 
-    @Column(name = "Date")
+    @Column(name = "date")
     private String eventDate;
 
-    @Column(name = "Time")
+    @Column(name = "time")
     private String eventTime;
 
     @ManyToOne(fetch = FetchType.EAGER)

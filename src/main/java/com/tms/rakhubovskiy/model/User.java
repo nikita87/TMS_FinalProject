@@ -1,8 +1,6 @@
 package com.tms.rakhubovskiy.model;
 
 import lombok.*;
-import org.springframework.data.annotation.Id;
-
 import javax.persistence.*;
 import java.util.List;
 

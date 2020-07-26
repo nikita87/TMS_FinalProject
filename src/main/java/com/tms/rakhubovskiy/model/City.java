@@ -4,36 +4,27 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 
 @Data
 @Builder
 @Entity
-@Table(name = "city")
+@Table(name = "cities")
 @NoArgsConstructor
 @AllArgsConstructor
-public class City extends BaseEntity{
+public class City extends BaseEntity {
 
-    @Column(name = "Name")
-    private String name;
+    @Column(name = "cityname")
+    private String cityName;
 
-    @JoinColumn(name = "CountryCode", referencedColumnName = "Code")
+    @Column(name = "countrycode")
     private String countryCode;
-
-    @Column(name = "District")
-    private String district;
-
-    @Column(name = "Population")
-    private Long population;
 
     @Override
     public String toString() {
         return "City{" +
-                "name='" + name + '\'' +
-                ", countryCode='" + countryCode + '\'' +
-                ", district='" + district + '\'' +
-                ", population=" + population +
+                "cityname='" + cityName + '\'' +
+                ", countrycode='" + countryCode + '\'' +
                 '}';
     }
 }
