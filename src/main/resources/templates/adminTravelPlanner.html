@@ -19,12 +19,13 @@
 <a href="/travelPlanner">Back to user page</a>
 
 <h1 align="center">Travel Planner</h1>
+
 <!--меню с вкладками -->
 <ul id="menu">
     <li id="cityInfo" class="tab_active" onclick="tab(this);">cityInfo</li>
     <li id="countryInfo" onclick="tab(this);">countryInfo</li>
-    <li id="hotelinfo" onclick="tab(this);">hotelInfo</li>
-    <li id="userinfo" onclick="tab(this);">userInfo</li>
+    <li id="hotelInfo" onclick="tab(this);">hotelInfo</li>
+    <li id="userInfo" onclick="tab(this);">userInfo</li>
 </ul>
 
 <!--контейнер со страницами -->
@@ -43,7 +44,7 @@
             </div>
             <div class="row">
                 <br>
-                <button id="cityAdd" type="submit">Add</button>
+                <button id="cityAdd" type="submit">Add City</button>
             </div>
             <div>
                 <br>
@@ -58,11 +59,156 @@
                         <td th:utext="${city.id}"></td>
                         <td th:utext="${city.cityName}"></td>
                         <td th:utext="${city.countryCode}"></td>
-                        <td><a th:href="@{adminTravelPlanner/{id}(id=${city.id})}">Delete</a></td>
+                        <td><a th:href="@{adminTravelPlanner/{id}(id=${city.id})}" onclick="return confirm('Are you sure?')">Delete</a></td>
                     </tr>
                 </table>
             </div>
         </form>
+    </div>
+
+    <!--**********countryInfo*********-->
+    <div id="countryInfo_content" class="tab_content">
+        <form th:action="@{/adminTravelPlanner}" th:object="${newCountry}" method="post">
+            <div class="row">
+                <div class="col-75">
+                    <input id="Name" type="text" autocomplete="off" name="name" placeholder="Enter country name">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-75">
+                    <input id="Code" type="text" autocomplete="off" name="code" placeholder="enter country code(for example, NLD)">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-75">
+                    <select class="custom-select" name="continent">
+                        <option value="">Choose continent name:</option>
+                        <option value="Asia">Asia</option>
+                        <option value="Europe">Europe</option>
+                        <option value="North America">North America</option>
+                        <option value="Africa">Africa</option>
+                        <option value="Oceania">Oceania</option>
+                        <option value="Antarctica">Antarctica</option>
+                        <option value="South America">South America</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-75">
+                    <input id="Region" type="text" autocomplete="off" name="region" placeholder="enter region name">
+                </div>
+            </div>
+            <div class="row">
+                <br>
+                <button id="countryAdd" type="submit">Add Country</button>
+            </div>
+            <div>
+                <br>
+                <table border="1">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name of country</th>
+                        <th>Code of country</th>
+                        <th>Continent</th>
+                        <th>Region</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr th:each ="country:${country}">
+                        <td th:utext="${country.id}"></td>
+                        <td th:utext="${country.name}"></td>
+                        <td th:utext="${country.code}"></td>
+                        <td th:utext="${country.continent}"></td>
+                        <td th:utext="${country.region}"></td>
+                        <td><a th:href="@{adminTravelPlanner/{id}(id=${country.id})}" onclick="return confirm('Are you sure?')">Delete</a></td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </div>
+
+    <!--*********hotelInfo**********-->
+    <div id="hotelInfo_content" class="tab_content">
+        <form th:action="@{/adminTravelPlanner}" th:object="${newHotel}" method="post">
+            <div class="row">
+                <div class="col-75">
+                    <input id="hotelName" type="text" autocomplete="off" name="hotelName" placeholder="Enter hotel name">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-75">
+                    <select class="custom-select" name="hotelClass">
+                        <option value="0">Choose hotel class:</option>
+                        <option value="1*">1*</option>
+                        <option value="2*">2*</option>
+                        <option value="2+*">2+*</option>
+                        <option value="3*">3*</option>
+                        <option value="3+*">3+*</option>
+                        <option value="4*">4*</option>
+                        <option value="4+*">4+*</option>
+                        <option value="5*">5*</option>
+                        <option value="5+*">5+*</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-75">
+                    <input id="address" type="text" autocomplete="off" name="address" placeholder="Enter hotel address">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-75">
+                    <input id="description" type="text" autocomplete="off" name="description" placeholder="Enter hotel info">
+                </div>
+            </div>
+            <div class="row">
+                <br>
+                <button id="hotelAdd" type="submit">Add Hotel</button>
+            </div>
+            <div>
+                <br>
+                <table border="1">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name of hotel</th>
+                        <th>Class of hotel</th>
+                        <th>Address</th>
+                        <th>Description</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr th:each ="hotel:${hotel}">
+                        <td th:utext="${hotel.id}"></td>
+                        <td th:utext="${hotel.hotelName}"></td>
+                        <td th:utext="${hotel.hotelClass}"></td>
+                        <td th:utext="${hotel.address}"></td>
+                        <td th:utext="${hotel.description}"></td>
+                        <td><a th:href="@{adminTravelPlanner/{id}(id=${city.id})}" onclick="return confirm('Are you sure?')">Delete</a></td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </div>
+
+    <!--*********userInfo**********-->
+    <div id="userInfo_content" class="tab_content">
+        <br>
+        <table border="1">
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Action</th>
+            </tr>
+            <tr th:each ="user:${users}">
+                <td th:utext="${user.id}"></td>
+                <td th:utext="${user.username}"></td>
+                <td th:utext="${user.password}"></td>
+                <td th:utext="${user.firstname}"></td>
+                <td th:utext="${user.lastname}"></td>
+                <td><a th:href="@{adminTravelPlanner/{id}(id=${user.id})}" onclick="return confirm('Are you sure?')">Delete</a></td>
+            </tr>
+        </table>
     </div>
 </div>
 
