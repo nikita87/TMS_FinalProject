@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/travelPlanner.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+       <title>Travel Planning Service</title>
+    <style>
+        body {
+            background-color: #b3d7ff;
+            color: black;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-size: 100%;
+        }
+    </style>
+</head>
+<body>
+<a href="/adminTravelPlanner/hotelInfo">Previous</a><b> | </b>
+<a href="/travelPlanner">Back to user page</a>
+
+<h1 align="center">User Information</h1>
+
+    <div id="userInfo_content" class="tab_content">
+        <br>
+        <table border="1">
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Action</th>
+            </tr>
+            <tr th:each ="user:${users}">
+                <td th:utext="${user.id}"></td>
+                <td th:utext="${user.username}"></td>
+                <td th:utext="${user.password}"></td>
+                <td th:utext="${user.firstname}"></td>
+                <td th:utext="${user.lastname}"></td>
+                <td><a th:href="@{adminTravelPlanner/userInfo/{id}(id=${user.id})}" onclick="return confirm('Are you sure?')">Delete</a></td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>

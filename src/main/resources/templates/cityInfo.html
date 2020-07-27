@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/travelPlanner.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+       <title>Travel Planning Service</title>
+    <style>
+        body {
+            background-color: #b3d7ff;
+            color: black;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-size: 100%;
+        }
+    </style>
+</head>
+<body>
+<a href="/adminTravelPlanner">Previous</a><b> | </b>
+<a href="/adminTravelPlanner/countryInfo">Next</a>
+
+<h1 align="center">City Information</h1>
+
+    <div id="cityInfo_content" class="tab_content">
+        <form th:action="@{/adminTravelPlanner/cityInfo}" th:object="${newCity}" method="post">
+            <div class="row">
+                <div class="col-75">
+                    <input id="cityName" type="text" autocomplete="off" name="cityName" placeholder="Enter city name">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-75">
+                    <input id="countryCode" type="text" autocomplete="off" name="countryCode" placeholder="enter country code(for example, NLD)">
+                </div>
+            </div>
+            <div class="row">
+                <br>
+                <button id="cityAdd" type="submit">Add City</button>
+            </div>
+            <div>
+                <br>
+                <table border="1">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name of city</th>
+                        <th>Code of country</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr th:each ="city:${city}">
+                        <td th:utext="${city.id}"></td>
+                        <td th:utext="${city.cityName}"></td>
+                        <td th:utext="${city.countryCode}"></td>
+                        <td><a th:href="@{adminTravelPlanner/cityInfo/{id}(id=${city.id})}" onclick="return confirm('Are you sure?')">Delete</a></td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

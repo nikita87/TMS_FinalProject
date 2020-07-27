@@ -2,7 +2,6 @@ package com.tms.rakhubovskiy.service;
 
 import com.tms.rakhubovskiy.model.User;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -16,4 +15,5 @@ public interface UserService {
 
     User saveUser(User user);
 
+    void deleteUserById (Long userId);
 }
