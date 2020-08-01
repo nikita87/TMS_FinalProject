@@ -37,52 +37,50 @@
 
 <!--контейнер со страницами -->
 <div id="container">
+    <!--вкладка Hotel Search-->
     <div id="hotelsearch_content" class="tab_content visible">
-        <form th:action="@{/travelPlanner/}" th:object="${country}" method="post">
-            <div class="row">
-                <div class="col-75">
-                    <select class="custom-select" >
-                        <option value="">Choose country:</option>
-                        <option th:each="country:${countries}"
-                                th:value="${country.code}"
-                                th:text="${country.name}"/>
-                    </select>
-                </div>
+        <!--select Country-->
+        <div class="row">
+            <div class="col-75">
+                <select id="selectCountry" class="custom-select" name="selectCountry"  onchange="getCountryCode(this.value)">
+                    <option value="" >Choose country:</option>
+                    <option th:each="country:${countries}"
+                            th:value="${country.code}"
+                            th:text="${country.name}"/>
+                </select>
             </div>
-
-            <div class="row">
-                <div class="col-75">
-                    <select class="custom-select">
-                        <option value="">Choose city:</option>
-                        <option th:each="city:${cities}"
-                                th:value="${city.countryCode}"
-                                th:text="${city.name}"/>
-                    </select>
-                </div>
+        </div>
+        <!--select City-->
+        <div class="row">
+            <div class="col-75">
+                <select id="selectCity" class="custom-select" name="selectCity">
+                    <option value="">Choose city:</option>
+                </select>
             </div>
-            <div class="row">
-                <div class="col-75">
-                    <select class="custom-select">
-                        <option value="0">Choose hotel class:</option>
-                        <option value="1">1*</option>
-                        <option value="2">2*</option>
-                        <option value="3">2+*</option>
-                        <option value="4">3*</option>
-                        <option value="5">3+*</option>
-                        <option value="6">4*</option>
-                        <option value="7">4+*</option>
-                        <option value="8">5*</option>
-                        <option value="9">5+*</option>
-                    </select>
-                </div>
+        </div>
+        <!--select Hotel Class-->
+        <div class="row">
+            <div class="col-75">
+                <select id="selectHotelClass" class="custom-select" name="selectHotelClass">
+                    <option value="0">Choose hotel class:</option>
+                    <option value="1*">1*</option>
+                    <option value="2*">2*</option>
+                    <option value="2+*">2+*</option>
+                    <option value="3*">3*</option>
+                    <option value="3+*">3+*</option>
+                    <option value="4*">4*</option>
+                    <option value="4+*">4+*</option>
+                    <option value="5*">5*</option>
+                    <option value="5+*">5+*</option>
+                </select>
             </div>
-            <div class="row">
-                <br>
-                <button id="inputSearch" type="submit">Search</button>
-            </div>
-        </form>
+        </div>
+        <div class="row">
+            <br>
+            <button id="inputSearch" type="submit">Search</button>
+        </div>
     </div>
-
+    <!--вкладка TimeTable-->
     <div id="timetable_content" class="tab_content">
         <form th:action="@{/travelPlanner}" th:object="${newEvent}" method="post">
             <div class="row-timetable">
@@ -91,7 +89,7 @@
                 <input id="eventTime" type="time" name="eventTime">
             </div>
             <div class="row">
-                <button id="eventAdd" type="submit">Add</button>
+                <button id="eventAdd" type="submit">Add Event</button>
             </div>
             <div>
                 <table border="1">
@@ -105,13 +103,13 @@
                         <td th:utext="${event.eventName}"></td>
                         <td th:utext="${event.eventDate}"></td>
                         <td th:utext="${event.eventTime}"></td>
-                        <td><a th:href="@{travelPlanner/{id}(id=${event.id})}">Delete</a></td>
+                        <td><a th:href="@{travelPlanner/{id}(id=${event.id})}" onclick="return confirm('Are you sure?')">Delete</a></td>
                     </tr>
                 </table>
             </div>
         </form>
-
     </div>
+    <!--вкладка Budget-->
     <div id="budget_content" class="tab_content">
         Бюджет
     </div>
@@ -136,6 +134,24 @@
                     content.className='tab_content';                  //скрыть связанный с ней блок контента
                 }
             }
+        }
+    }
+
+    function getCountryCode(countryCode) {
+        $.get(
+            "/travelPlanner/cities",
+            {
+                countryCode: countryCode,
+            },
+            onAjaxSuccess
+        );
+        function onAjaxSuccess(data){
+            jQuery.each(data, function(){
+                $('<option/>', {
+                    'value': this.countryCode,
+                    'text': this.cityName
+                }).appendTo('#selectCity');
+            });
         }
     }
 </script>

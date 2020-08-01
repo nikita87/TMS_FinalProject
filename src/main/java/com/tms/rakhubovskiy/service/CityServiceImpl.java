@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 
-
 @Service
 @Transactional
 public class CityServiceImpl implements CityService {
@@ -16,12 +15,6 @@ public class CityServiceImpl implements CityService {
     public CityServiceImpl(CityRepository cityRepository) {
         this.cityRepository = cityRepository;
     }
-
-    /*@Override
-    public List<City> findAllByCountry_code(String countryCode) {
-        List<City> cities = cityRepository.findAllByCountry_code(countryCode);
-        return cities;
-    }*/
 
     @Override
     public List<City> findAll() {
@@ -36,6 +29,11 @@ public class CityServiceImpl implements CityService {
     @Override
     public void deleteCityById(Long id) {
         cityRepository.deleteById(id);
+    }
+
+    @Override
+    public List<City> findCitiesByCountryCode(String countryCode) {
+        return cityRepository.findCitiesByCountryCode(countryCode);
     }
 
 
