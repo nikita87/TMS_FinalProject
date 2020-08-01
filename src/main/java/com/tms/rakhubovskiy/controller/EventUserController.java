@@ -1,11 +1,12 @@
 package com.tms.rakhubovskiy.controller;
 
 import com.tms.rakhubovskiy.model.Event;
+import com.tms.rakhubovskiy.model.Expenditure;
 import com.tms.rakhubovskiy.model.Role;
 import com.tms.rakhubovskiy.model.User;
-import com.tms.rakhubovskiy.service.CityService;
 import com.tms.rakhubovskiy.service.CountryService;
 import com.tms.rakhubovskiy.service.EventService;
+import com.tms.rakhubovskiy.service.ExpenditureService;
 import com.tms.rakhubovskiy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,14 +24,14 @@ public class EventUserController extends BaseController{
     private final EventService eventService;
     private final UserService userService;
     private final CountryService countryService;
-    private final CityService cityService;
+    private final ExpenditureService expenditureService;
 
     @Autowired
-    public EventUserController(EventService eventService, UserService userService, CountryService countryService, CityService cityService) {
+    public EventUserController(EventService eventService, UserService userService, CountryService countryService, ExpenditureService expenditureService) {
         this.eventService = eventService;
         this.userService = userService;
         this.countryService = countryService;
-        this.cityService = cityService;
+        this.expenditureService = expenditureService;
     }
 
     @GetMapping(value = "/travelPlanner")
@@ -46,24 +47,33 @@ public class EventUserController extends BaseController{
         session.setAttribute("admin", admin);
         User user = userService.findUserById(getUserId());
         Long userId = user.getId();
+        model.addAttribute("countries", countryService.findAll());
         model.addAttribute("events", eventService.findAllByUserId(userId));
+        model.addAttribute("expenditures", expenditureService.findAllByUserId(userId));
         return "/travelPlanner";
     }
 
     @GetMapping(value = "/travelPlanner/{id}")
-    public String deleteEvent(@PathVariable("id") long eventId){
+    public String deleteEvent(@PathVariable("id") long eventId,
+                              @PathVariable("id") long expId){
         eventService.deleteEventById(eventId);
+        expenditureService.deleteExpenditureById(expId);
         return "redirect:/travelPlanner";
     }
 
-    @PostMapping(value = "/travelPlanner")
+    @PostMapping(value = "/travelPlanner/events")
     public String eventCreate(Event newEvent){
         User user = userService.findUserById(getUserId());
-        Long userId = user.getId();
-        newEvent.setId(userId);
         newEvent.setUser(user);
         eventService.saveEvent(newEvent);
         return "redirect:/travelPlanner";
     }
 
+    @PostMapping(value = "/travelPlanner/budget")
+    public String eventCreate(Expenditure newExpenditure){
+        User user = userService.findUserById(getUserId());
+        newExpenditure.setUser(user);
+        expenditureService.saveExp(newExpenditure);
+        return "redirect:/travelPlanner";
+    }
 }

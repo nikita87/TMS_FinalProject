@@ -85,7 +85,7 @@
     </div>
     <!--вкладка TimeTable-->
     <div id="timetable_content" class="tab_content">
-        <form th:action="@{/travelPlanner}" th:object="${newEvent}" method="post">
+        <form th:action="@{/travelPlanner/events}" th:object="${newEvent}" method="post">
             <div class="row-timetable">
                 <input id="eventName" type="text" autocomplete="off" name="eventName" placeholder="For example, Central Park">
                 <input id="eventDate" type="date" name="eventDate">
@@ -114,7 +114,36 @@
     </div>
     <!--вкладка Budget-->
     <div id="budget_content" class="tab_content">
-        Бюджет
+        <form th:action="@{/travelPlanner/budget}" th:object="${newExpenditure}" method="post">
+            <div class="row-budget">
+                <input id="expName" type="text" autocomplete="off" name="expName" placeholder="Input expenditure">
+                <input id="expPrice" type="number" size="3" name="expPrice" min="0" value="0">
+                <select id="currency" class="custom-select-currency" name="currency">
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                </select>
+            </div>
+            <div class="row">
+                <button id="expenditurePriceAdd" type="submit">Add</button>
+            </div>
+            <div>
+                <table border="1">
+                    <tr>
+                        <th>Expenditure</th>
+                        <th>Price</th>
+                        <th>Currency</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr th:each ="expenditure:${expenditures}">
+                        <td th:utext="${expenditure.expName}"></td>
+                        <td th:utext="${expenditure.expPrice}"></td>
+                        <td th:utext="${expenditure.currency}"></td>
+                        <td><a th:href="@{travelPlanner/{id}(id=${expenditure.id})}" onclick="return confirm('Are you sure?')">Delete</a></td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+
     </div>
 </div>
 
