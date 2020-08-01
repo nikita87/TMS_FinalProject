@@ -1,6 +1,5 @@
 package com.tms.rakhubovskiy.service;
 
-
 import com.tms.rakhubovskiy.model.Hotel;
 import com.tms.rakhubovskiy.repository.HotelRepository;
 import org.springframework.stereotype.Service;
@@ -34,7 +33,7 @@ public class HotelServiceImpl implements HotelService{
     }
 
     @Override
-    public List<Hotel> findHotelsByHotelClass(String hotelClass) {
-        return hotelRepository.findHotelsByHotelClass(hotelClass);
+    public List<Hotel> findHotelsByHotelClassAndAddress(String address, String hotelClass) {
+        return hotelRepository.findHotelsByHotelClassAndAddress(address, hotelClass);
     }
 }

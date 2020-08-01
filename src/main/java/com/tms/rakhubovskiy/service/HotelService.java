@@ -1,7 +1,6 @@
 package com.tms.rakhubovskiy.service;
 
 import com.tms.rakhubovskiy.model.Hotel;
-
 import java.util.List;
 
 public interface HotelService {
@@ -12,6 +11,6 @@ public interface HotelService {
 
     void deleteHotelById (Long hotelId);
 
-    List<Hotel> findHotelsByHotelClass(String hotelClass);
+    List<Hotel> findHotelsByHotelClassAndAddress(String address, String hotelClass);
 
 }

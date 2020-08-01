@@ -78,6 +78,7 @@
         <div class="row">
             <br>
             <button id="btnHotelSearch" type="search">Search</button>
+            <button id="btnClearForm" type="clear">Clear</button>
         </div>
         <br>
         <div id="resultInfo"></div>
@@ -158,10 +159,11 @@
     }
 
     $('#btnHotelSearch').click(function () {
+        var address = $("#selectCity option:selected").html(); // достаем содержание(не value) выбранной опции в select
         var hotelClass = document.getElementById('selectHotelClass').value;
         $.ajax({
             url:"/travelPlanner/hotels",
-            data:{hotelClass:hotelClass},
+            data:{address:address, hotelClass:hotelClass},
             success:function(data){
                 for (var i = 0;i < data.length;i++){
                     for (var key in data[i]){
@@ -177,6 +179,11 @@
             }
         })
     })
+
+    $('#btnClearForm').click(function() {
+        location.reload(true);
+    });
+
 </script>
 </body>
 </html>
