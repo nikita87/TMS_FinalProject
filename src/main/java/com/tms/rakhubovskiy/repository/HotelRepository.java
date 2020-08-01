@@ -1,6 +1,6 @@
-package com.rakhubovskiy.travelplanningservice.repository;
+package com.tms.rakhubovskiy.repository;
 
-import com.rakhubovskiy.travelplanningservice.model.Hotel;
+import com.tms.rakhubovskiy.model.Hotel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

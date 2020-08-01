@@ -1,6 +1,6 @@
-package com.rakhubovskiy.travelplanningservice.service;
+package com.tms.rakhubovskiy.service;
 
-import com.rakhubovskiy.travelplanningservice.model.Hotel;
+import com.tms.rakhubovskiy.model.Hotel;
 
 import java.util.List;
 

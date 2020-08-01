@@ -1,7 +1,7 @@
-package com.rakhubovskiy.travelplanningservice.controller.rest;
+package com.tms.rakhubovskiy.controller.rest;
 
-import com.rakhubovskiy.travelplanningservice.model.Hotel;
-import com.rakhubovskiy.travelplanningservice.service.HotelService;
+import com.tms.rakhubovskiy.model.Hotel;
+import com.tms.rakhubovskiy.service.HotelService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;

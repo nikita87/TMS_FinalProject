@@ -1,7 +1,8 @@
-package com.rakhubovskiy.travelplanningservice.service;
+package com.tms.rakhubovskiy.service;
 
-import com.rakhubovskiy.travelplanningservice.model.Hotel;
-import com.rakhubovskiy.travelplanningservice.repository.HotelRepository;
+
+import com.tms.rakhubovskiy.model.Hotel;
+import com.tms.rakhubovskiy.repository.HotelRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
