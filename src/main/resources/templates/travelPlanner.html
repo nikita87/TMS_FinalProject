@@ -77,8 +77,10 @@
         </div>
         <div class="row">
             <br>
-            <button id="inputSearch" type="submit">Search</button>
+            <button id="btnHotelSearch" type="search">Search</button>
         </div>
+        <br>
+        <div id="resultInfo"></div>
     </div>
     <!--вкладка TimeTable-->
     <div id="timetable_content" class="tab_content">
@@ -154,6 +156,27 @@
             });
         }
     }
+
+    $('#btnHotelSearch').click(function () {
+        var hotelClass = document.getElementById('selectHotelClass').value;
+        $.ajax({
+            url:"/travelPlanner/hotels",
+            data:{hotelClass:hotelClass},
+            success:function(data){
+                for (var i = 0;i < data.length;i++){
+                    for (var key in data[i]){
+                        var line = document.createElement("HR");
+                        document.getElementById('resultInfo').append(key + ":" + data[i][key]);
+                        document.getElementById('resultInfo').append(line);
+                    }
+                }
+                console.log(data);
+            },
+            error:function (data) {
+                console.log(data);
+            }
+        })
+    })
 </script>
 </body>
 </html>

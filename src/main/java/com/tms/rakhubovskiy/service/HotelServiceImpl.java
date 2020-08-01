@@ -1,7 +1,7 @@
-package com.tms.rakhubovskiy.service;
+package com.rakhubovskiy.travelplanningservice.service;
 
-import com.tms.rakhubovskiy.model.Hotel;
-import com.tms.rakhubovskiy.repository.HotelRepository;
+import com.rakhubovskiy.travelplanningservice.model.Hotel;
+import com.rakhubovskiy.travelplanningservice.repository.HotelRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -30,5 +30,10 @@ public class HotelServiceImpl implements HotelService{
     @Override
     public void deleteHotelById(Long hotelId) {
         hotelRepository.deleteById(hotelId);
+    }
+
+    @Override
+    public List<Hotel> findHotelsByHotelClass(String hotelClass) {
+        return hotelRepository.findHotelsByHotelClass(hotelClass);
     }
 }
