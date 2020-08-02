@@ -16,6 +16,7 @@
     </style>
 </head>
 <body>
+<h2 th:text="${#session.getAttribute('userName')}">Hello user</h2>
 <div th:if="${#session.getAttribute('admin')==true}">
     <div>
         <a href="/adminTravelPlanner">Go to admin page</a>
@@ -141,6 +142,9 @@
                         <td><a th:href="@{travelPlanner/{id}(id=${expenditure.id})}" onclick="return confirm('Are you sure?')">Delete</a></td>
                     </tr>
                 </table>
+                <br>
+                <h2>Total amount:</h2>
+                <h2 th:utext="${summa}"></h2>
             </div>
         </form>
 

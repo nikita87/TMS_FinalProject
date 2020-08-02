@@ -12,4 +12,6 @@ public interface ExpenditureService {
 
     void deleteExpenditureById (Long expId);
 
+    double getSumPriceExpenditure(Long userId);
+
 }

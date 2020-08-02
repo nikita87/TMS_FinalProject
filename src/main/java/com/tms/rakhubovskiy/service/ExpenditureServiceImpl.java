@@ -32,4 +32,17 @@ public class ExpenditureServiceImpl implements ExpenditureService{
     public void deleteExpenditureById(Long expId) {
         expenditureRepository.deleteById(expId);
     }
+
+    @Override
+    public double getSumPriceExpenditure(Long userId) {
+        List<Expenditure> expenditures = expenditureRepository.findAllByUserId(userId);
+        double sumPrice = 0;
+        for (Expenditure exp : expenditures){
+            double price = exp.getExpPrice();
+            sumPrice = sumPrice + price;
+        }
+        return sumPrice;
+    }
+
+
 }

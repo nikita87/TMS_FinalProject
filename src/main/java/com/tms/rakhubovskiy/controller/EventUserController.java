@@ -37,6 +37,7 @@ public class EventUserController extends BaseController{
     @GetMapping(value = "/travelPlanner")
     public String getMainPage(HttpServletRequest request, Model model){
         HttpSession session = request.getSession();
+        session.setAttribute("userName", getUserName());
         List<Role> roles = getUserRole();
         boolean admin = false;
         for (Role role : roles) {
@@ -50,6 +51,7 @@ public class EventUserController extends BaseController{
         model.addAttribute("countries", countryService.findAll());
         model.addAttribute("events", eventService.findAllByUserId(userId));
         model.addAttribute("expenditures", expenditureService.findAllByUserId(userId));
+        model.addAttribute("summa", expenditureService.getSumPriceExpenditure(userId));
         return "/travelPlanner";
     }
 

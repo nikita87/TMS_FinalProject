@@ -17,4 +17,9 @@ public abstract class BaseController {
         User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return principal.getRoles();
     }
+
+    protected String getUserName(){
+        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return principal.getUsername();
+    }
 }
