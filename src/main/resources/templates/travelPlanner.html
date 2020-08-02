@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/travelPlanner.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+       <title>Travel Planning Service</title>
+    <style>
+        body {
+            background-color: #b3d7ff;
+            color: black;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-size: 100%;
+        }
+    </style>
+</head>
+<body>
+<h2 th:text="${#session.getAttribute('userName')}">Hello user</h2>
+<div th:if="${#session.getAttribute('admin')==true}">
+    <div>
+        <a href="/adminTravelPlanner">Go to admin page</a>
+    </div>
+</div>
+<div>
+    <a href="/">
+        Logout
+    </a>
+</div>
+
+<h1 align="center">Travel Planner</h1>
+<!--меню с вкладками -->
+<ul id="menu">
+    <li id="hotelsearch" class="tab_active" onclick="tab(this);">Hotel search</li>
+    <li id="timetable" onclick="tab(this);">Timetable</li>
+    <li id="budget" onclick="tab(this);">Budget</li>
+</ul>
+
+<!--контейнер со страницами -->
+<div id="container">
+    <!--вкладка Hotel Search-->
+    <div id="hotelsearch_content" class="tab_content visible">
+        <!--select Country-->
+        <div class="row">
+            <div class="col-75">
+                <select id="selectCountry" class="custom-select" name="selectCountry"  onchange="getCountryCode(this.value)">
+                    <option value="" >Choose country:</option>
+                    <option th:each="country:${countries}"
+                            th:value="${country.code}"
+                            th:text="${country.name}"/>
+                </select>
+            </div>
+        </div>
+        <!--select City-->
+        <div class="row">
+            <div class="col-75">
+                <select id="selectCity" class="custom-select" name="selectCity">
+                    <option value="">Choose city:</option>
+                </select>
+            </div>
+        </div>
+        <!--select Hotel Class-->
+        <div class="row">
+            <div class="col-75">
+                <select id="selectHotelClass" class="custom-select" name="selectHotelClass">
+                    <option value="0">Choose hotel class:</option>
+                    <option value="1*">1*</option>
+                    <option value="2*">2*</option>
+                    <option value="2+*">2+*</option>
+                    <option value="3*">3*</option>
+                    <option value="3+*">3+*</option>
+                    <option value="4*">4*</option>
+                    <option value="4+*">4+*</option>
+                    <option value="5*">5*</option>
+                    <option value="5+*">5+*</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <br>
+            <button id="btnHotelSearch" type="search">Search</button>
+            <button id="btnClearForm" type="clear">Clear</button>
+        </div>
+        <br>
+        <div id="resultInfo"></div>
+    </div>
+    <!--вкладка TimeTable-->
+    <div id="timetable_content" class="tab_content">
+        <form th:action="@{/travelPlanner/events}" th:object="${newEvent}" method="post">
+            <div class="row-timetable">
+                <input id="eventName" type="text" autocomplete="off" name="eventName" placeholder="For example, Central Park">
+                <input id="eventDate" type="date" name="eventDate">
+                <input id="eventTime" type="time" name="eventTime">
+            </div>
+            <div class="row">
+                <button id="eventAdd" type="submit">Add Event</button>
+            </div>
+            <div>
+                <table border="1">
+                    <tr>
+                        <th>Name of event</th>
+                        <th>Date of event</th>
+                        <th>Time of event</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr th:each ="event:${events}">
+                        <td th:utext="${event.eventName}"></td>
+                        <td th:utext="${event.eventDate}"></td>
+                        <td th:utext="${event.eventTime}"></td>
+                        <td><a th:href="@{travelPlanner/{id}(id=${event.id})}" onclick="return confirm('Are you sure?')">Delete</a></td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </div>
+    <!--вкладка Budget-->
+    <div id="budget_content" class="tab_content">
+        <form th:action="@{/travelPlanner/budget}" th:object="${newExpenditure}" method="post">
+            <div class="row-budget">
+                <input id="expName" type="text" autocomplete="off" name="expName" placeholder="Input expenditure">
+                <input id="expPrice" type="number" size="3" name="expPrice" min="0" value="0">
+                <select id="currency" class="custom-select-currency" name="currency">
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                </select>
+            </div>
+            <div class="row">
+                <button id="expenditurePriceAdd" type="submit">Add</button>
+            </div>
+            <div>
+                <table border="1">
+                    <tr>
+                        <th>Expenditure</th>
+                        <th>Price</th>
+                        <th>Currency</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr th:each ="expenditure:${expenditures}">
+                        <td th:utext="${expenditure.expName}"></td>
+                        <td th:utext="${expenditure.expPrice}"></td>
+                        <td th:utext="${expenditure.currency}"></td>
+                        <td><a th:href="@{travelPlanner/{id}(id=${expenditure.id})}" onclick="return confirm('Are you sure?')">Delete</a></td>
+                    </tr>
+                </table>
+                <br>
+                <h2>Total amount:</h2>
+                <h2 th:utext="${summa}"></h2>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<script>
+    function tab(el) {
+        var menu=el.parentNode;                                        //Получить список вкладок
+        var tabs=menu.getElementsByTagName('li');
+        for(var i=0; i<tabs.length; i++){
+            var tab=tabs[i];                                           //Вкладка
+            var content=document.getElementById(tab.id + '_content');  //Блок контента
+            if(tab.id==el.id){                                         //Вкладка по которой кликнули мышкой
+                tab.className='tab_active';                            //сделать вкладку активной
+                if(content){                                           //показать связанный с ней блок контента
+                    content.className='tab_content visible';
+                }
+            }
+            else {
+                tab.className='';                                     //сделать вкладку неактивной
+                if(content) {
+                    content.className='tab_content';                  //скрыть связанный с ней блок контента
+                }
+            }
+        }
+    }
+
+    function getCountryCode(countryCode) {
+        $.get(
+            "/travelPlanner/cities",
+            {
+                countryCode: countryCode,
+            },
+            onAjaxSuccess
+        );
+        function onAjaxSuccess(data){
+            jQuery.each(data, function(){
+                $('<option/>', {
+                    'value': this.countryCode,
+                    'text': this.cityName
+                }).appendTo('#selectCity');
+            });
+        }
+    }
+
+    $('#btnHotelSearch').click(function () {
+        var address = $("#selectCity option:selected").html(); // достаем содержание(не value) выбранной опции в select
+        var hotelClass = document.getElementById('selectHotelClass').value;
+        $.ajax({
+            url:"/travelPlanner/hotels",
+            data:{address:address, hotelClass:hotelClass},
+            success:function(data){
+                for (var i = 0;i < data.length;i++){
+                    for (var key in data[i]){
+                        var line = document.createElement("HR");
+                        document.getElementById('resultInfo').append(key + ":" + data[i][key]);
+                        document.getElementById('resultInfo').append(line);
+                    }
+                }
+                console.log(data);
+            },
+            error:function (data) {
+                console.log(data);
+            }
+        })
+    })
+
+    $('#btnClearForm').click(function() {
+        location.reload(true);
+    });
+
+</script>
+</body>
+</html>

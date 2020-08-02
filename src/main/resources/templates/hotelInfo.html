@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/travelPlanner.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+       <title>Travel Planning Service</title>
+    <style>
+        body {
+            background-color: #b3d7ff;
+            color: black;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-size: 100%;
+        }
+    </style>
+</head>
+<body>
+<a href="/adminTravelPlanner/countryInfo">Previous</a><b> | </b>
+<a href="/adminTravelPlanner/userInfo">Next</a>
+
+<h1 align="center">Hotel Information</h1>
+
+    <div id="hotelInfo_content" class="tab_content">
+        <form th:action="@{/adminTravelPlanner/hotelInfo}" th:object="${newHotel}" method="post">
+            <div class="row">
+                <div class="col-75">
+                    <input id="hotelName" type="text" autocomplete="off" name="hotelName" placeholder="Enter hotel name">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-75">
+                    <select class="custom-select" name="hotelClass">
+                        <option value="0">Choose hotel class:</option>
+                        <option value="1*">1*</option>
+                        <option value="2*">2*</option>
+                        <option value="2+*">2+*</option>
+                        <option value="3*">3*</option>
+                        <option value="3+*">3+*</option>
+                        <option value="4*">4*</option>
+                        <option value="4+*">4+*</option>
+                        <option value="5*">5*</option>
+                        <option value="5+*">5+*</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-75">
+                    <input id="address" type="text" autocomplete="off" name="address" placeholder="Enter hotel address">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-75">
+                    <textarea id="description" rows="7" name="description" placeholder="Enter hotel info"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <br>
+                <button id="hotelAdd" type="submit">Add Hotel</button>
+            </div>
+            <div>
+                <br>
+                <table border="1">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name of hotel</th>
+                        <th>Class of hotel</th>
+                        <th>Address</th>
+                        <th>Description</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr th:each ="hotel:${hotel}">
+                        <td th:utext="${hotel.id}"></td>
+                        <td th:utext="${hotel.hotelName}"></td>
+                        <td th:utext="${hotel.hotelClass}"></td>
+                        <td th:utext="${hotel.address}"></td>
+                        <td th:utext="${hotel.description}"></td>
+                        <td><a th:href="@{adminTravelPlanner/hotelInfo/{id}(id=${hotel.id})}" onclick="return confirm('Are you sure?')">Delete</a></td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

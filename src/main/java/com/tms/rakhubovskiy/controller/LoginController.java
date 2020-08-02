@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class UserController {
+public class LoginController extends BaseController {
 
     private final UserService userService;
 
@@ -19,7 +19,7 @@ public class UserController {
     private UserValidator userValidator;
 
     @Autowired
-    public UserController(UserService userService) {
+    public LoginController(UserService userService) {
         this.userService = userService;
     }
 
@@ -47,9 +47,13 @@ public class UserController {
             model.addAttribute("errors", bindingResult.getAllErrors());
             return "/error";
         }
-        userService.saveUser(newUser);
-        return "/user_page";
-    }
 
+        User checkUser = userService.saveUser(newUser);
+        if (checkUser != null){
+            return "/travelPlanner";
+        }
+        model.addAttribute("error", "This username already exist. Please enter another one.");
+        return "/registration";
+    }
 
 }

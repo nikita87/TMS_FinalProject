@@ -15,6 +15,7 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 
 @Configuration
 @EnableWebSecurity
+@ComponentScan("com.rakhubovskiy.*")
 public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -36,17 +37,17 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-
-                .antMatchers("/h2/**").permitAll()
                 .antMatchers("/").permitAll()
                 .antMatchers("/registration").permitAll()
+                .antMatchers("/css/**").permitAll()
+                .antMatchers("/adminTravelPlanner/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
              .and()
                 .formLogin()
                 .loginPage("/login")
                 .permitAll()
                 .loginProcessingUrl("/perform_login")
-                .defaultSuccessUrl("/user_page")
+                .defaultSuccessUrl("/travelPlanner")
              .and()
                 .logout()
              .and()
