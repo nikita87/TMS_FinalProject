@@ -3,12 +3,14 @@ package com.tms.rakhubovskiy.service;
 import com.tms.rakhubovskiy.model.User;
 import com.tms.rakhubovskiy.repository.RoleRepository;
 import com.tms.rakhubovskiy.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 
+@Slf4j
 @Service
 @Transactional
 public class UserServiceImpl implements UserService{
