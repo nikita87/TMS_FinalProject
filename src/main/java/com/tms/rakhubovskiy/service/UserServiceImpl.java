@@ -24,23 +24,27 @@ public class UserServiceImpl implements UserService{
         this.passwordEncoder = passwordEncoder;
     }
 
-    @Override
+     @Override
     public User findUserByUsername(String username) {
+        log.debug("Searching user by username: {}", username);
         return userRepository.findUserByUsername(username);
     }
 
     @Override
     public User findUserById(Long id) {
+        log.debug("Searching users by id: {}", id);
         return userRepository.findById(id).orElse(null);
     }
 
     @Override
     public List<User> findAll() {
+        log.debug("Searching for an all users");
         return userRepository.findAll();
     }
 
     @Override
     public void deleteUserById(Long userId) {
+        log.debug("Deletion user by id:{}", userId);
         userRepository.deleteById(userId);
     }
 
@@ -50,8 +54,10 @@ public class UserServiceImpl implements UserService{
         if (checkUser == null){
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             user.setRoles(roleRepository.findRoleById());
+            log.debug("users received for saving: {}", user);
             return userRepository.save(user);
         }
+        log.debug("user not save");
         return null;
     }
 }

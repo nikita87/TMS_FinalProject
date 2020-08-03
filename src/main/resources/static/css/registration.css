@@ -1,0 +1,20 @@
+input[type=text]{
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid orange;
+    float: left;
+    width: 30%;
+    background: #f1f1f1;
+}
+
+.col-75 {
+    float: left;
+    width: 75%;
+    margin-top: 6px;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}

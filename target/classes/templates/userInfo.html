@@ -17,8 +17,7 @@
 </head>
 <body>
 <a href="/adminTravelPlanner/hotelInfo">Previous</a><b> | </b>
-<a href="/adminTravelPlanner">Back to admin page</a>
-
+<a href="/travelPlanner">Back to user page</a>
 
 <h1 align="center">User Information</h1>
 
@@ -39,7 +38,7 @@
                 <td th:utext="${user.password}"></td>
                 <td th:utext="${user.firstname}"></td>
                 <td th:utext="${user.lastname}"></td>
-                <td><a th:href="@{/userInfo/{id}(id=${user.id})}" onclick="return confirm('Are you sure?')">Delete</a></td>
+                <td><a th:href="@{adminTravelPlanner/userInfo/{id}(id=${user.id})}" onclick="return confirm('Are you sure?')">Delete</a></td>
             </tr>
         </table>
     </div>

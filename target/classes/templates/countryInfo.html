@@ -17,13 +17,12 @@
 </head>
 <body>
 <a href="/adminTravelPlanner/cityInfo">Previous</a><b> | </b>
-<a href="/adminTravelPlanner/hotelInfo">Next</a><b> | </b>
-<a href="/adminTravelPlanner">Back to admin page</a>
+<a href="/adminTravelPlanner/hotelInfo">Next</a>
 
 <h1 align="center">Country Information</h1>
 
     <div id="countryInfo_content" class="tab_content">
-        <form th:action="@{/adminTravelPlanner/countryInfo}" th:object="${newCountry}" method="post">
+        <form th:action="@{adminTravelPlanner/countryInfo}" th:object="${newCountry}" method="post">
             <div class="row">
                 <div class="col-75">
                     <input id="Name" type="text" autocomplete="off" name="name" placeholder="Enter country name">
@@ -74,7 +73,7 @@
                         <td th:utext="${country.code}"></td>
                         <td th:utext="${country.continent}"></td>
                         <td th:utext="${country.region}"></td>
-                        <td><a th:href="@{/countryInfo/{id}(id=${country.id})}" onclick="return confirm('Are you sure?')">Delete</a></td>
+                        <td><a th:href="@{adminTravelPlanner/countryInfo/{id}(id=${country.id})}" onclick="return confirm('Are you sure?')">Delete</a></td>
                     </tr>
                 </table>
             </div>
