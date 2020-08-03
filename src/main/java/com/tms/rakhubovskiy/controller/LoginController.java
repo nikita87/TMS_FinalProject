@@ -50,7 +50,7 @@ public class LoginController extends BaseController {
 
         User checkUser = userService.saveUser(newUser);
         if (checkUser != null){
-            return "/travelPlanner";
+            return "/login";
         }
         model.addAttribute("error", "This username already exist. Please enter another one.");
         return "/registration";

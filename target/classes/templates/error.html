@@ -10,8 +10,8 @@
 
 <h3>${error}</h3>
 <h3>${errors}</h3>
-<th:forEach var="error" items="errors">
-    <th:out value="@{/error}">${error}</th:out>
-</th:forEach>
+<th:each var="error" items="errors">
+    <th:utext value="@{/error}">${error}</th:utext>
+</th:each>
 </body>
 </html>

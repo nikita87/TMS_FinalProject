@@ -16,8 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class AdminController extends BaseController{
-
-    private final UserService userService;
+ private final UserService userService;
     private final CountryService countryService;
     private final CityService cityService;
     private final HotelService hotelService;
@@ -59,25 +58,25 @@ public class AdminController extends BaseController{
         return "/userInfo";
     }
 
-    @GetMapping(value = "/adminTravelPlanner/cityInfo/{id}")
+    @GetMapping(value = "/cityInfo/{id}")
     public String deleteCity(@PathVariable("id") long cityId){
         cityService.deleteCityById(cityId);
         return "redirect:/adminTravelPlanner/cityInfo";
     }
 
-    @GetMapping(value = "/adminTravelPlanner/countryInfo/{id}")
+    @GetMapping(value = "/countryInfo/{id}")
     public String deleteCountry(@PathVariable("id") long countryId){
         countryService.deleteCountryById(countryId);
         return "redirect:/adminTravelPlanner/countryInfo";
     }
 
-    @GetMapping(value = "/adminTravelPlanner/hotelInfo/{id}")
+    @GetMapping(value = "/hotelInfo/{id}")
     public String deleteHotel(@PathVariable("id") long hotelId){
         hotelService.deleteHotelById(hotelId);
         return "redirect:/adminTravelPlanner/hotelInfo";
     }
 
-    @GetMapping(value = "/adminTravelPlanner/userInfo/{id}")
+    @GetMapping(value = "/userInfo/{id}")
     public String deleteUser(@PathVariable("id") long userId){
         userService.deleteUserById(userId);
         return "redirect:/adminTravelPlanner/userInfo";

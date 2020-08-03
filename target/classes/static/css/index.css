@@ -1,15 +1,17 @@
-h1 {
-    color: darkslateblue;
+button {
+    background-color: #fd7e14;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 10%;
 }
 
-footer {
-    position: fixed;
-    height: 50px;
-    bottom: 0;
-    width: 100%;
-    background-color: coral;
+button:hover {
+    opacity: 0.8;
 }
 
-footer p {
-    padding: 15px;
+.container {
+    padding: 16px;
 }
